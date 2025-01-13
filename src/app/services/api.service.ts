@@ -100,6 +100,7 @@ export class ApiService {
                 }
                 this.currentConditionsUrl = currentURL + '/observations/latest';
 
+                // ******************* Start Here Dino 2025_01_13
                 console.log(`response.features["0"].id: ${ response.features["0"].id }`);
                 console.log(`this.currentConditionsUrl: ${ this.currentConditionsUrl } ` );
 
