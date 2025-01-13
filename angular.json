@@ -87,10 +87,15 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "https://platform.linkedin.com/badges/js/profile.js"
+            ]
           }
         }
       }
     }
+  },
+  "cli": {
+    "analytics": "e9a0076b-ad02-4772-a1fc-319ffc5b9879"
   }
 }

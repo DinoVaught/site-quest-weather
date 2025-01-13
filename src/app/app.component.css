@@ -1,0 +1,32 @@
+
+.top-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    background-color: #333;
+    z-index: 1000;
+}
+
+.bottom-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 35px;
+    background-color: #333;
+    z-index: 1000;
+}
+
+.weather-widget{
+    background: linear-gradient(180deg, #616060, #0e0e0e);
+    margin: 0 auto;
+    margin-top: 50px;
+    width: 60%;
+    border: 2px solid;
+    border-color: #050505;
+    border-radius: 13px;
+    /*box-shadow: 1px 1px 10px black;*/
+    padding: 5px;
+}
