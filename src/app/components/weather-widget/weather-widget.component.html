@@ -1,1 +1,7 @@
-<p>weather-widget works!</p>
+<p>{{ weatherData?.cityState }}</p>
+<div style="display: flex; align-items: center;">
+    <img *ngIf="weatherData?.iconURL" [src]="weatherData?.iconURL" alt="Weather Icon">
+    <span *ngIf="weatherData?.tempFahrenheit" class="temp-text" >{{ weatherData?.tempFahrenheit }}°F</span>
+    <p class="forecast-text">{{ weatherData?.forecastCurrent }}</p>
+</div>
+<p class="time-text">{{ weatherData?.time }}</p>

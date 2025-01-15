@@ -1,111 +1,173 @@
 import {Injectable} from '@angular/core';
+import { DatePipe } from '@angular/common';
 import {HttpClient} from '@angular/common/http';
-import {Observable} from 'rxjs';
-import {map, switchMap} from 'rxjs/operators';
-import {WeatherData} from '../models/weather-data.model';
+import {lastValueFrom, Observable} from 'rxjs';
+import {map} from 'rxjs/operators';
+import {CurrentWeatherData} from '../models/weather-data.model';
+import NewCommandModule from "@angular/cli/src/commands/new/cli";
 
 
-@Injectable({
-    providedIn: 'root'
-})
+export const weatherData: CurrentWeatherData = {
+    cityState: '',
+    tempFahrenheit: -200,
+    iconURL: '',
+    wind: '',
+    forecastCurrent: '',
+    stationName: '',
+    time: '',
+}
+
+@Injectable({ providedIn: 'root' })
+
 export class ApiService {
-    private observationStationsUrl: string | null = null;
-    private forecastHourlyUrl: string | null = null;
-    private currentConditionsUrl: string | null = null;
+    private latitude: string = '';
+    private longitude: string = '';
+    private observeStation1 = '';
+    // private observeStation2 = '';
+
+    private forecastUrl = '';
+    private forecastHourlyUrl = '';
+
+    private currentConditionsUrl = '';
+
+    private cityState: string = '';
 
 
     constructor(private http: HttpClient) {
     }
 
-    getWeatherData(): Observable<WeatherData> {
-        return this.getGeolocation().pipe(
-            switchMap(({latitude, longitude}) =>
-                this.getCityState(latitude, longitude)
-            )
-        );
+    async initService(): Promise <CurrentWeatherData> {
+         await this.getLocation();
+         await this.getInitData();
+         await this.getData1();
+         await this.getForecastData();
+         await this.getLocalData();
+
+        return weatherData;
+
     }
 
-    getGeolocation(): Observable<{ latitude: number; longitude: number }> {
-        return new Observable((observer) => {
+
+    getLocation(): Promise<void> {
+        return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
-                    (position) => {
-                        const latitude = position.coords.latitude;
-                        const longitude = position.coords.longitude;
+                    position => {
 
-                        observer.next({latitude, longitude});
-                        observer.complete();
+                        this.longitude = position.coords.longitude.toFixed(4);
+                        this.latitude = position.coords.latitude.toFixed(4);
+
+                        resolve(); // Resolve the promise when done
                     },
-                    (error) => {
-                        observer.error(error);
+                    error => {
+                        console.error('Error fetching geolocation:', error);
+                        reject(error); // Reject the promise if there's an error
                     }
                 );
             } else {
-                observer.error('Geolocation is not supported by this browser.');
+                console.error('Geolocation is not supported by this browser.');
+                reject('Geolocation not supported');
             }
         });
     }
 
-    private getCityState(latitude: number, longitude: number): Observable<WeatherData> {
-        const url = `https://api.weather.gov/points/${latitude},${longitude}`;
-        return this.http.get<any>(url).pipe(
-            switchMap((response) => {
-                const properties = response.properties;
-                const relativeLocation = properties.relativeLocation?.properties;
+    async getInitData(): Promise<void> {
+        const url = `https://api.weather.gov/points/${this.latitude},${this.longitude}`;
+        try {
+            const JSON = await lastValueFrom(this.http.get<any>(url));
 
-                if (!relativeLocation) {
-                    throw new Error('Relative location data is missing in the response');
-                }
+            weatherData.cityState = `${JSON.properties.relativeLocation.properties.city}, ${JSON.properties.relativeLocation.properties.state}`;
 
-                const weatherData: WeatherData = {
-                    city: relativeLocation.city,
-                    state: relativeLocation.state,
-                    stationName: '',
-                };
+            this.observeStation1 = JSON.properties.observationStations;
 
-                this.observationStationsUrl = properties.observationStations;
-                this.forecastHourlyUrl = properties.forecastHourly;
+            this.forecastUrl = JSON.properties.forecast;
 
-                console.log(`properties.forecastHourly:  ${ properties.forecastHourly } ` );
-                console.log(`properties.observationStations:  ${ properties.observationStations } ` );
+            this.forecastHourlyUrl = JSON.properties.forecastHourly;
 
-                return this.getStationName(properties.observationStations).pipe(
-                    map((stationName) => {
-                        weatherData.stationName = stationName;
-                        return weatherData;
-                    })
-                );
+            // console.log(`this.forecastHourlyUrl:  ${this.forecastHourlyUrl}`);
+            // console.log(`this.forecastUrl:  ${this.forecastUrl}`);
 
 
-            })
-        );
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
     }
 
-    private getStationName(stationsUrl: string): Observable<string> {
+    async getData1(): Promise<void> {
+        const url = this.observeStation1;
+        try {
+            const JSON = await lastValueFrom(this.http.get<any>(url));
 
-        // console.log(`stationsUrl: ${ stationsUrl }`);
+            this.currentConditionsUrl = JSON.observationStations[0] + '/observations/latest';
 
-        return this.http.get<any>(stationsUrl).pipe(
-            map((response) => {
-                const firstStation = response.features[0];
+            weatherData.stationName = JSON.features[0].properties.name; // [0] match with earlier array element num !!
+            // weatherData.temperature = '';
+            // temperature
 
-                if (!firstStation) {
-                    throw new Error('No stations found in the response');
-                }
+            console.log(`this.observeStation1  url:  ${url}`); //  JSON.properties.observationStations
+            // console.log(`this.currentConditionsUrl:  ${this.currentConditionsUrl}`); //  JSON.properties.observationStations
 
 
-                const currentURL = response.features["0"].id;
-                if (!currentURL) {
-                    throw new Error('Station ID is missing in the response');
-                }
-                this.currentConditionsUrl = currentURL + '/observations/latest';
-
-                // ******************* Start Here Dino 2025_01_13
-                console.log(`response.features["0"].id: ${ response.features["0"].id }`);
-                console.log(`this.currentConditionsUrl: ${ this.currentConditionsUrl } ` );
-
-                return firstStation.properties.name; // = St. Louis Lambert International Airport
-            })
-        );
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
     }
+
+    async getForecastData(): Promise<void> {
+        const url = this.forecastUrl ;
+        try {
+            const JSON = await lastValueFrom(this.http.get<any>(url));
+
+
+            weatherData.wind = JSON.properties.periods[0].windDirection + ' ' + JSON.properties.periods[0].windSpeed;
+            weatherData.forecastCurrent = JSON.properties.periods[0].detailedForecast;
+            // weatherData.iconURL =  JSON.properties.periods[0].icon; // I think this is the 'forecast icon' not the 'current icon '
+
+            // console.log(`URL:  ${url}`);
+            // console.log(`weatherData:  ${weatherData}`);
+
+
+
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+    }
+
+    async getLocalData(): Promise<void> {
+
+
+        const url = this.currentConditionsUrl;
+        try {
+            const JSON = await lastValueFrom(this.http.get<any>(url));
+
+
+
+
+            weatherData.iconURL = JSON.properties.icon;
+
+            const datePipe = new DatePipe('en-US')
+            const timestamp = JSON.properties.timestamp;
+            weatherData.time = datePipe.transform(timestamp, 'EEE h:mm a')  || 'Invalid date';
+
+            // console.log(`weatherData.time: ${weatherData.time}`);
+
+            weatherData.tempFahrenheit = JSON.properties.temperature.value;
+
+            if (JSON.properties.temperature.unitCode === 'wmoUnit:degC')
+            {
+                weatherData.tempFahrenheit = (weatherData.tempFahrenheit * 9) / 5 + 32;
+                weatherData.tempFahrenheit = Math.round(weatherData.tempFahrenheit);
+            }
+
+
+
+            // console.log(`** !! url:  ${url}`);
+            // console.log(`weatherData.temperature:  ${weatherData.tempFahrenheit}`);
+
+
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+    }
+
 }

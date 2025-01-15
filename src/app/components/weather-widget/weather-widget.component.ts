@@ -1,34 +1,29 @@
 import {Component, OnInit} from '@angular/core';
+import { CommonModule } from '@angular/common'; //
 import {ApiService} from '../../services/api.service';
-import { WeatherData } from '../../models/weather-data.model'
+import { CurrentWeatherData } from '../../models/weather-data.model'
+
 
 
 @Component({
     selector: 'app-weather-widget',
-    imports: [],
     templateUrl: './weather-widget.component.html',
     styleUrl: './weather-widget.component.css',
-    standalone: true
+    standalone: true,
+    imports: [CommonModule]
 })
+
+
 export class WeatherWidgetComponent implements OnInit {
-    weatherData: WeatherData | null = null;
-
-
+    weatherData: CurrentWeatherData | null = null;
 
     constructor(private apiService: ApiService) {
     }
 
-    ngOnInit(): void {
+    async ngOnInit(): Promise<void> {
 
-        this.apiService.getWeatherData().subscribe({
-            next: (data: WeatherData) => {
-                this.weatherData = data; // Store the fetched weather data
-                console.log('Weather Data:', this.weatherData); // Log the result for debugging
-            },
-            error: (error) => {
-                console.error('Failed to fetch weather data:', error); // Log any errors
-            },
-        });
+        this.weatherData = await this.apiService.initService();
+        console.log('');
 
     }
 }
