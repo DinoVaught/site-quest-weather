@@ -30,3 +30,11 @@
     /*box-shadow: 1px 1px 10px black;*/
     padding: 5px;
 }
+
+@media (max-width: 768px) {
+    .weather-widget {
+        width: 90%; /* Slightly less than full width */
+        margin-top: 41px; /* Reduce top margin for compactness */
+        padding: 10px; /* Adjust padding for better proportions */
+    }
+}

@@ -40,8 +40,9 @@ export class ApiService {
          await this.getLocation();
          await this.getInitData();
          await this.getData1();
-         await this.getForecastData();
+         await this.getImmediateForecast();
          await this.getLocalData();
+         await this.getHourlyForecast();
 
         return weatherData;
 
@@ -84,7 +85,7 @@ export class ApiService {
 
             this.forecastHourlyUrl = JSON.properties.forecastHourly;
 
-            // console.log(`this.forecastHourlyUrl:  ${this.forecastHourlyUrl}`);
+            console.log(`this.forecastHourlyUrl:  ${this.forecastHourlyUrl}`);
             // console.log(`this.forecastUrl:  ${this.forecastUrl}`);
 
 
@@ -104,7 +105,7 @@ export class ApiService {
             // weatherData.temperature = '';
             // temperature
 
-            console.log(`this.observeStation1  url:  ${url}`); //  JSON.properties.observationStations
+            // console.log(`this.observeStation1  url:  ${url}`); //  JSON.properties.observationStations
             // console.log(`this.currentConditionsUrl:  ${this.currentConditionsUrl}`); //  JSON.properties.observationStations
 
 
@@ -113,18 +114,21 @@ export class ApiService {
         }
     }
 
-    async getForecastData(): Promise<void> {
+    async getImmediateForecast(): Promise<void> {
         const url = this.forecastUrl ;
         try {
             const JSON = await lastValueFrom(this.http.get<any>(url));
 
 
             weatherData.wind = JSON.properties.periods[0].windDirection + ' ' + JSON.properties.periods[0].windSpeed;
-            weatherData.forecastCurrent = JSON.properties.periods[0].detailedForecast;
+            weatherData.forecastCurrent =  JSON.properties.periods[0].name + ': ' +  JSON.properties.periods[0].detailedForecast;
+
+            // JSON.properties.periods[0].name
+
             // weatherData.iconURL =  JSON.properties.periods[0].icon; // I think this is the 'forecast icon' not the 'current icon '
 
             // console.log(`URL:  ${url}`);
-            // console.log(`weatherData:  ${weatherData}`);
+            console.log(`==== url:  ${url}`);
 
 
 
@@ -139,7 +143,6 @@ export class ApiService {
         const url = this.currentConditionsUrl;
         try {
             const JSON = await lastValueFrom(this.http.get<any>(url));
-
 
 
 
@@ -169,5 +172,28 @@ export class ApiService {
             console.error('Error fetching weather data:', error);
         }
     }
+
+    async getHourlyForecast(): Promise<void> {
+        const url = this.forecastHourlyUrl ;
+        try {
+            const JSON = await lastValueFrom(this.http.get<any>(url));
+
+            const periods = JSON.properties.periods;
+
+            const first16Periods = periods.slice(0, 16);
+
+
+
+
+            console.log(`first16Periods:  ${first16Periods}`);
+            // console.log(`weatherData:  ${weatherData}`);
+
+
+
+        } catch (error) {
+            console.error('Error fetching weather data:', error);
+        }
+    }
+
 
 }
