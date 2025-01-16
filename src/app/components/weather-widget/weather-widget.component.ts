@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common'; //
 import {ApiService} from '../../services/api.service';
-import { CurrentWeatherData } from '../../models/weather-data.model'
+import { CurrentWeatherData, HourlyWeatherData  } from '../../models/weather-data.models'
 
 
 
@@ -16,6 +16,7 @@ import { CurrentWeatherData } from '../../models/weather-data.model'
 
 export class WeatherWidgetComponent implements OnInit {
     weatherData: CurrentWeatherData | null = null;
+    hourlyWeather: HourlyWeatherData[] = [];
 
     constructor(private apiService: ApiService) {
     }
@@ -23,6 +24,8 @@ export class WeatherWidgetComponent implements OnInit {
     async ngOnInit(): Promise<void> {
 
         this.weatherData = await this.apiService.initService();
+        this.hourlyWeather = this.apiService.getHourlyWeatherData();
+
         console.log('');
 
     }

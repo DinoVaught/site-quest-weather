@@ -1,10 +1,13 @@
 <div class="city-time-container">
-    <p class="city-state" >{{ weatherData?.cityState }}</p>
+    <p class="city-state">{{ weatherData?.cityState }}</p>
     <p class="time-text">{{ weatherData?.time }}</p>
 </div>
 <div class="weather-details">
     <img *ngIf="weatherData?.iconURL" [src]="weatherData?.iconURL" alt="Weather Icon">
-    <span *ngIf="weatherData?.tempFahrenheit" class="temp-text" >{{ weatherData?.tempFahrenheit }}°F</span>
-<!--    <span *ngIf="weatherData?.wind" class="wind-text">{{ weatherData?.wind }} mph</span>-->
-    <p class="forecast-text">{{ weatherData?.forecastCurrent }}</p>
+    <div class="temp-wind-container">
+        <span *ngIf="weatherData?.tempFahrenheit || weatherData?.wind" class="temp-wind-text">
+            {{ weatherData?.tempFahrenheit }}°F - {{ weatherData?.wind }}
+        </span>
+        <p class="forecast-text">{{ weatherData?.forecastCurrent }}</p>
+    </div>
 </div>

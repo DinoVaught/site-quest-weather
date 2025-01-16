@@ -10,7 +10,7 @@
 }
 
 .city-state {
-    font-size: 1.2rem; /* Slightly larger for prominence */
+    font-size: .9rem; /* Slightly larger for prominence */
     color: white; /* Match the theme of the weather widget */
     margin: 5px 0; /* Add vertical spacing */
     text-align: left; /* Center the text within the widget */
@@ -25,16 +25,17 @@
 
 .weather-details {
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    /*align-items: center; */
+    align-items: flex-start;
+    gap: 15px;
 }
 
 img {
     width: 10vw; /* 10% of the viewport width */
     height: auto; /* Maintain aspect ratio */
 
-    max-width: 68px; /* Set a maximum width */
-    margin: 7px 0;
+    max-width: 58px; /* Set a maximum width */
+    margin-top: 3px;
     border-radius: 8px;
     border-width: 1px;
     border-style: solid;
@@ -42,20 +43,36 @@ img {
 }
 
 span {
-    font-size: 1.2em; /* Adjust the size of the text */
+    font-size: .9em; /* Adjust the size of the text */
     color: #333; /* Change the color if needed */
-    font-weight: bold; /* Make it bold for emphasis */
+    /*font-weight: bold; !* Make it bold for emphasis *!*/
 }
 
-
-.temp-text {
-    margin: 10px;
-    margin-left: 8px;
-    color: white;
+.temp-wind-container {
+    display: flex;
+    flex-direction: column; /* Stack the temp-text and wind-text vertically */
+    align-items: flex-start; /* Align items to the left within the container */
+    margin-left: 10px; /* Add spacing from the left */
     align-self: flex-start;
 }
+
+.temp-wind-text {
+    margin-top: 7px;
+    color: white;
+    font-size: 1rem;
+    align-self: flex-start;
+}
+
+/*.wind-text{*/
+/*    color: #f30909;*/
+/*    margin-top: 5px;*/
+/*    font-size: .9rem;*/
+/*}*/
+
 .forecast-text {
-    margin-left: 12px;
+    /*margin-left: 12px;*/
+    margin-bottom: 1px;
+    margin-top: 10px;
     font-size: 1rem;
     color: white;
     text-align: left;
@@ -80,6 +97,12 @@ span {
     img {
         width: 10vw; /* Slightly larger percentage for smaller screens */
         max-width: 50px; /* Reduce maximum width */
+        margin-top: 5px;
+    }
+
+    .temp-wind-text {
+        font-size: 0.7em;
+        margin-top: 4px;
     }
 
     span {
@@ -88,7 +111,9 @@ span {
 
     .forecast-text {
         font-size: 0.7rem; /* Smaller text for smaller screens */
-        margin-left: 0; /* Reduce margin for tighter spacing */
+        margin-top: 5px;
+        margin-left: 0;
     }
+
 
 }
