@@ -81,16 +81,19 @@ span {
 
 .hourly-forecasts {
     display: flex;
-    margin-top: 9px;
-    margin-bottom: 9px;
-    flex-wrap: nowrap;
-    justify-content: center;
-    overflow-x: auto;
-    gap: 10px;
+    flex-direction: column; /* Ensures rows are stacked vertically */
+    gap: 10px; /* Adds spacing between rows */
 }
 
+.hourly-row {
+    display: flex;
+    justify-content: center; /* Center items within the row */
+    gap: 10px; /* Adds spacing between items in the row */
+}
 
-
+app-hourly-forecast {
+    flex: 0 0 auto; /* Prevents items from stretching */
+}
 
 @media (max-width: 768px) {
 
@@ -124,6 +127,7 @@ span {
         font-size: 0.7rem; /* Smaller text for smaller screens */
         margin-top: 5px;
         margin-left: 0;
+        margin-bottom: 7px;
     }
 
 

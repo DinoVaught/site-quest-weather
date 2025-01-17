@@ -17,6 +17,8 @@ import { HourlyForecastComponent  } from '../hourly-forecast/hourly-forecast.com
 export class WeatherWidgetComponent implements OnInit {
     weatherData: CurrentWeatherData | null = null;
     hourlyWeather: HourlyWeatherData[] = [];
+    firstRow: any[] = []; // Declare firstRow
+    secondRow: any[] = []; // Declare secondRow
 
     constructor(private apiService: ApiService) {
     }
@@ -25,6 +27,9 @@ export class WeatherWidgetComponent implements OnInit {
 
         this.weatherData = await this.apiService.initService();
         this.hourlyWeather = this.apiService.getHourlyWeatherData();
+
+        this.firstRow = this.hourlyWeather.slice(0, 4);
+        this.secondRow = this.hourlyWeather.slice(4, 8);
 
         console.log(this.hourlyWeather);
 
