@@ -11,3 +11,14 @@
         <p class="forecast-text">{{ weatherData?.forecastCurrent }}</p>
     </div>
 </div>
+
+<div class="hourly-forecasts">
+    <app-hourly-forecast
+            *ngFor="let forecast of hourlyWeather"
+            [time]="forecast.time"
+            [temp]="forecast.temp"
+            [iconURL]="forecast.iconURL"
+            [wind]="forecast.wind"
+            [shortForecast]="forecast.shortForecast">
+    </app-hourly-forecast>
+</div>

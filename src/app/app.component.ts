@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { WeatherWidgetComponent } from './components/weather-widget/weather-widget.component';
 
+
 @Component({
   selector: 'app-root',
   imports: [RouterOutlet, WeatherWidgetComponent],

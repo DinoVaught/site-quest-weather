@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import { CommonModule } from '@angular/common'; //
 import {ApiService} from '../../services/api.service';
 import { CurrentWeatherData, HourlyWeatherData  } from '../../models/weather-data.models'
-
+import { HourlyForecastComponent  } from '../hourly-forecast/hourly-forecast.component'
 
 
 @Component({
@@ -10,7 +10,7 @@ import { CurrentWeatherData, HourlyWeatherData  } from '../../models/weather-dat
     templateUrl: './weather-widget.component.html',
     styleUrl: './weather-widget.component.css',
     standalone: true,
-    imports: [CommonModule]
+    imports: [CommonModule, HourlyForecastComponent ]
 })
 
 
@@ -26,7 +26,7 @@ export class WeatherWidgetComponent implements OnInit {
         this.weatherData = await this.apiService.initService();
         this.hourlyWeather = this.apiService.getHourlyWeatherData();
 
-        console.log('');
+        console.log(this.hourlyWeather);
 
     }
 }

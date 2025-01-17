@@ -20,7 +20,8 @@
 }
 
 .weather-widget{
-    background: linear-gradient(180deg, #616060, #0e0e0e);
+    /*background: linear-gradient(180deg, #616060, #0e0e0e);*/
+    background: #333;
     margin: 0 auto;
     margin-top: 50px;
     width: 60%;

@@ -210,7 +210,7 @@ export class ApiService {
 
                 const hourItem: HourlyWeatherData = {
                     time: hourlyPeriods[i].startTime.toString(),
-                    temp: hourlyPeriods[i].temperature   + ' ' + hourlyPeriods[i].temperatureUnit,
+                    temp: hourlyPeriods[i].temperature   + '°' + hourlyPeriods[i].temperatureUnit,
                     iconURL: hourlyPeriods[i].icon,
                     wind: hourlyPeriods[i].windSpeed + ' ' + hourlyPeriods[i].windDirection,
                     shortForecast: hourlyPeriods[i].shortForecast,

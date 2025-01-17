@@ -2,7 +2,6 @@
 :host { color: white;}
 
 
-
 .city-time-container {
     display: flex;
     justify-content: space-between;
@@ -39,7 +38,7 @@ img {
     border-radius: 8px;
     border-width: 1px;
     border-style: solid;
-    border-color: chocolate;
+    border-color: cornsilk;
 }
 
 span {
@@ -58,8 +57,8 @@ span {
 
 .temp-wind-text {
     margin-top: 7px;
+    font-size: 17px;
     color: white;
-    font-size: 1rem;
     align-self: flex-start;
 }
 
@@ -71,14 +70,26 @@ span {
 
 .forecast-text {
     /*margin-left: 12px;*/
+    font-size: 17px;
     margin-bottom: 1px;
     margin-top: 10px;
-    font-size: 1rem;
     color: white;
     text-align: left;
     flex: 1;
     display: block;
 }
+
+.hourly-forecasts {
+    display: flex;
+    margin-top: 9px;
+    margin-bottom: 9px;
+    flex-wrap: nowrap;
+    justify-content: center;
+    overflow-x: auto;
+    gap: 10px;
+}
+
+
 
 
 @media (max-width: 768px) {
