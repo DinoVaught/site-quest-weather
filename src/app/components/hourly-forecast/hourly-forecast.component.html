@@ -1,0 +1,9 @@
+<div class="forecast-item">
+    <div class="time">{{ time | date: 'h:mm a' }}</div>
+    <div class="icon-temp">
+        <img [src]="iconURL" alt="Weather Icon" class="icon" />
+        <div class="temp">{{ temp }}</div>
+    </div>
+    <div class="short-forecast">{{ shortForecast }}</div>
+    <div class="wind">Wind: {{ wind }}</div>
+</div>
