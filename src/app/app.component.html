@@ -1,14 +1,54 @@
 <div class="top-bar">
-    <!-- top bar  -->
+    <p class="linked-link-bar">Visit my <a href=" https://www.linkedin.com/in/ronvaught" target="_blank">LinkedIn Profile</a></p>
+
+    <button class="about-button" (click)="openAbout()">About</button>
 </div>
 
 
 <div class="weather-widget">
     <app-weather-widget></app-weather-widget>
 </div>
+<app-rss-feed></app-rss-feed>
 
+<div *ngIf="showAbout" class="overlay"></div>
+<div *ngIf="showAbout" class="about-dialog">
+    <div class="dialog-content">
+        <p>I created this Weather and News web app to gain additional real-world web development experience. It is my
+            second web app.</p>
+        <p>The app functions seamlessly on various devices, including PC and mobile web browsers.</p>
+        <p>I built this app using the following stack of languages and tools:</p>
+        <p class="top-category"><strong>Frontend (WebStorm)</strong></p>
+        <ul>
+            <li>HTML (5)</li>
+            <li>CSS (3)</li>
+            <li>TypeScript (5.5.4)</li>
+            <li>Angular (18.2.9)</li>
+        </ul>
+        <p class="other-categories"><strong>Backend (Visual Studio)</strong></p>
+            <ul>
+                <li>C# (12.0)</li>
+                <li>.NET 8.0</li>
+                <li>ASP.NET Core (8.0) Web App</li>
+            </ul>
+        <p class="other-categories"><strong>Database</strong></p>
+            <ul>
+                <li>MySQL (8.0.37-SmarterASP.NET)</li>
+            </ul>
+        <p class="other-categories"><strong>Cloud Platform</strong></p>
+            <ul>
+                <li>SmarterASP.NET: (Backend and Frontend apps)</li>
+                <li>SmarterASP.NET: (MySQL database)</li>
+            </ul>
 
-<div class="bottom-bar">
-    <!-- bottom bar -->
+        <div class="button-row">
+            <p class="linked-link">Visit my <a href=" https://www.linkedin.com/in/ronvaught" target="_blank">LinkedIn Profile</a></p>
+            <button class="ok-button" (click)="closeAbout()">Close</button>
+        </div>
+    </div>
 </div>
+
+
+<!--<div class="bottom-bar">-->
+
+<!--</div>-->
 

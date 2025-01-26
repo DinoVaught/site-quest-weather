@@ -1,12 +1,20 @@
+<div *ngIf="isLoading; else content">
+    <div class="spinner-container">
+        <div class="spinner"></div>
+    </div>
+</div>
+
+<ng-template #content>
 <div class="city-time-container">
     <p class="city-state">{{ weatherData?.cityState }}</p>
-    <p class="time-text">{{ weatherData?.time }}</p>
+<!--    <p class="time-text">{{ weatherData?.time }}</p>-->
+    <p class="time-text" [title]="'The most recent data from weather.gov was recorded at ' + weatherData?.time" >{{ weatherData?.time }}</p>
 </div>
 <div class="weather-details">
     <img *ngIf="weatherData?.iconURL" [src]="weatherData?.iconURL" alt="Weather Icon">
-    <div class="temp-wind-container">
+    <div class="temp-wind-container" title="Weather data updates automatically every 15 minutes">
         <span *ngIf="weatherData?.tempFahrenheit || weatherData?.wind" class="temp-wind-text">
-            {{ weatherData?.tempFahrenheit }}°F - {{ weatherData?.wind }}
+            <span class="temp-text">{{ weatherData?.tempFahrenheit }}°F</span> - {{ weatherData?.wind }}
         </span>
         <p class="forecast-text">{{ weatherData?.forecastCurrent }}</p>
     </div>
@@ -37,4 +45,4 @@
         </app-hourly-forecast>
     </div>
 </div>
-
+</ng-template>

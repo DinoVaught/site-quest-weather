@@ -1,0 +1,14 @@
+<div class="rss-feed">
+    <h2>Today's Top News Stories</h2>
+    <ul>
+        <li *ngFor="let item of rssItems">
+            <h3>
+                <a [href]="item.urlLink" target="_blank">{{ item.title }}</a>
+            </h3>
+            <p class="description" *ngIf="item.description">{{ item.description }}</p>
+            <img *ngIf="item.urlImage" [src]="item.urlImage" alt="Image" />
+            <p class="publish-date"><small>{{ item.publishDate | date:'medium' }}</small></p>
+            <a class="read-more" [href]="item.urlLink" target="_blank">Read More</a>
+        </li>
+    </ul>
+</div>

@@ -33,7 +33,6 @@ export class ApiService {
 
     private currentConditionsUrl = '';
 
-    // private cityState: string = '';
 
 
     constructor(private http: HttpClient) {
@@ -87,7 +86,7 @@ export class ApiService {
 
             this.forecastHourlyUrl = JSON.properties.forecastHourly;
 
-            console.log(`this.forecastHourlyUrl:  ${this.forecastHourlyUrl}`);
+            // console.log(`this.forecastHourlyUrl:  ${this.forecastHourlyUrl}`);
             // console.log(`this.forecastUrl:  ${this.forecastUrl}`);
 
 
@@ -129,8 +128,7 @@ export class ApiService {
 
             // weatherData.iconURL =  JSON.properties.periods[0].icon; // I think this is the 'forecast icon' not the 'current icon '
 
-            // console.log(`URL:  ${url}`);
-            console.log(`==== url:  ${url}`);
+            // console.log(`==== url:  ${url}`);
 
 
 
@@ -180,6 +178,8 @@ export class ApiService {
         const url = this.forecastHourlyUrl ;
         let targetElement = 0;
         try {
+
+            console.log(` hours url  ${url}` );
 
             const JSON = await lastValueFrom(this.http.get<any>(url));
 

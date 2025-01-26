@@ -1,13 +1,47 @@
 
+/*.top-bar {*/
+/*    position: fixed;*/
+/*    top: 0;*/
+/*    left: 0;*/
+/*    width: 100%;*/
+/*    height: 35px;*/
+/*    background-color: #333;*/
+/*    z-index: 1000;*/
+/*}*/
 .top-bar {
     position: fixed;
+    width: 100vw;
     top: 0;
     left: 0;
-    width: 100%;
+    display: flex;
+    justify-content: space-between;
     height: 35px;
     background-color: #333;
     z-index: 1000;
 }
+
+.linked-link-bar {
+    margin-left: 23px;
+    margin-top: 11px;
+    font-size: 15px;
+    color: white;
+}
+
+.linked-link-bar a {
+    font-weight: bold;
+    color: #00c2ff;
+}
+
+.about-button {
+    background: transparent;
+    cursor: pointer;
+    border: none;
+    font-size: 16px;
+    color: white;
+    margin-top: 6px;
+    margin-right: 50px;
+}
+
 
 .bottom-bar {
     position: fixed;
@@ -19,23 +53,154 @@
     z-index: 1000;
 }
 
-.weather-widget{
-    /*background: linear-gradient(180deg, #616060, #0e0e0e);*/
-    background: #333;
-    margin: 0 auto;
-    margin-top: 50px;
-    width: 60%;
-    border: 2px solid;
-    border-color: #050505;
-    border-radius: 13px;
-    /*box-shadow: 1px 1px 10px black;*/
-    padding: 5px;
+.linked-link a {
+    color: #00a0dc;
+    font-weight: bold;
 }
 
+.weather-widget{
+    position: relative; /* Ensure the spinner-container aligns with this parent */
+    background: #00000091;
+    margin: 0 auto;
+    margin-top: 62px;
+    width: 60%;
+    border: 1px solid;
+    border-color: #fbfbfbbf;
+    border-radius: 13px;
+    /*box-shadow: 1px 1px 10px #fbfbfb;*/
+    padding-top: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 15px;
+    /*padding: 5px;*/
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.60);
+    z-index: 999;
+}
+
+.about-dialog {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: antiquewhite;
+    --shadow-color: aquamarine;
+    box-shadow: 0 0 7px 1px var(--shadow-color);
+    border-radius: 8px;
+    width: 50%;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.top-category{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.bottom-category{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.about-dialog ul{
+    margin-top: 1px;
+    margin-bottom: 22px;
+}
+
+.other-categories{
+    margin-top: 5px;
+    margin-bottom: 0;
+}
+
+.dialog-content {
+    text-align: left;
+}
+
+.button-row {
+    display: flex;
+    align-items: center; /* Align elements vertically in the center */
+    justify-content: space-between; /* Space between the elements */
+    margin-top: 20px;
+}
+
+.linked-link {
+    margin: 0;
+    flex-grow: 1;
+    text-align: left;
+}
+
+.linked-link a {
+    font-weight: bold;
+    color: #0035ff;
+}
+
+.ok-button {
+
+    padding: 8px 16px;
+    background-color: #f2f2f2;
+    color: black;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #000000cc;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+
+
+.ok-button:hover {
+    background-color: rgba(157, 155, 155, 0.37);
+}
+
+
 @media (max-width: 768px) {
-    .weather-widget {
-        width: 90%; /* Slightly less than full width */
-        margin-top: 41px; /* Reduce top margin for compactness */
-        padding: 10px; /* Adjust padding for better proportions */
+
+    .about-dialog {
+        top: 50%;
+        left: 50%;
+        width: 88%;
+        padding: 4px;
     }
+
+    .linked-link-bar {
+        margin-left: 14px;
+    }
+
+    .top-category{
+        margin-top: 1px;
+        margin-bottom: 0;
+    }
+
+    .other-categories{
+        margin-top: 1px;
+        margin-bottom: 0;
+    }
+
+    .about-dialog ul{
+        margin-bottom: 10px;
+    }
+
+    .weather-widget {
+        width: 89%;
+        margin-top: 44px;
+        padding: 10px;
+    }
+
+    .linked-link {
+        margin-left: 10px;
+        font-size: 15px;
+    }
+
+    .about-button {
+        font-size: 15px;
+        margin-right: 10px;
+    }
+
 }

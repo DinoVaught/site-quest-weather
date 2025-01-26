@@ -30,10 +30,10 @@
 }
 
 img {
-    width: 10vw; /* 10% of the viewport width */
-    height: auto; /* Maintain aspect ratio */
+    width: 10vw;
+    height: auto;
 
-    max-width: 58px; /* Set a maximum width */
+    max-width: 58px;
     margin-top: 3px;
     border-radius: 8px;
     border-width: 1px;
@@ -42,36 +42,43 @@ img {
 }
 
 span {
-    font-size: .9em; /* Adjust the size of the text */
-    color: #333; /* Change the color if needed */
-    /*font-weight: bold; !* Make it bold for emphasis *!*/
+    font-size: .9em;
+    color: #333;
 }
 
 .temp-wind-container {
     display: flex;
-    flex-direction: column; /* Stack the temp-text and wind-text vertically */
-    align-items: flex-start; /* Align items to the left within the container */
-    margin-left: 10px; /* Add spacing from the left */
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 10px;
     align-self: flex-start;
+}
+
+.temp-text {
+    font-weight: bold;
+    color: black;
+    font-size: 32px;
+    background-color: white;
+    padding-left: 2px;
+    padding-right: 5px;
+    margin-top: 4px;
+
 }
 
 .temp-wind-text {
     margin-top: 7px;
-    font-size: 17px;
+    font-weight: bold;
+    font-size: 18px;
     color: white;
     align-self: flex-start;
 }
 
-/*.wind-text{*/
-/*    color: #f30909;*/
-/*    margin-top: 5px;*/
-/*    font-size: .9rem;*/
-/*}*/
 
 .forecast-text {
     /*margin-left: 12px;*/
     font-size: 17px;
-    margin-bottom: 1px;
+    font-weight: bold;
+    margin-bottom: 8px;
     margin-top: 10px;
     color: white;
     text-align: left;
@@ -81,19 +88,52 @@ span {
 
 .hourly-forecasts {
     display: flex;
-    flex-direction: column; /* Ensures rows are stacked vertically */
-    gap: 10px; /* Adds spacing between rows */
+    flex-direction: column;
+    gap: 10px;
 }
 
 .hourly-row {
     display: flex;
-    justify-content: center; /* Center items within the row */
-    gap: 10px; /* Adds spacing between items in the row */
+    justify-content: center;
+    gap: 10px;
 }
 
 app-hourly-forecast {
-    flex: 0 0 auto; /* Prevents items from stretching */
+    flex: 0 0 auto;
 }
+
+.spinner-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.3);
+    z-index: 1000;
+}
+
+.spinner {
+    border: 10px solid #fd09094d;
+    border-top: 10px solid #34ff01;
+    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    animation: spin 1s linear infinite; /* Rotating animation */
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+
 
 @media (max-width: 768px) {
 
@@ -109,8 +149,8 @@ app-hourly-forecast {
     }
 
     img {
-        width: 10vw; /* Slightly larger percentage for smaller screens */
-        max-width: 50px; /* Reduce maximum width */
+        width: 12vw;
+        max-width: 50px;
         margin-top: 5px;
     }
 
@@ -120,14 +160,22 @@ app-hourly-forecast {
     }
 
     span {
-        font-size: 0.7em; /* Slightly smaller font size */
+        font-size: 0.7em;
     }
 
     .forecast-text {
-        font-size: 0.7rem; /* Smaller text for smaller screens */
+        font-size: 0.7rem;
         margin-top: 5px;
         margin-left: 0;
         margin-bottom: 7px;
+    }
+
+    .spinner {
+        border: 6px solid #fd09094d;
+        border-top: 6px solid #34ff01;
+        width: 70px;
+        height: 70px;
+
     }
 
 
