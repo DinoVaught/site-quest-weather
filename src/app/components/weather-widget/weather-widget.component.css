@@ -30,10 +30,11 @@
 }
 
 img {
-    width: 10vw;
+    width: 13vw;
     height: auto;
 
-    max-width: 58px;
+    max-width: 100px;
+    margin-bottom: 6px;
     margin-top: 3px;
     border-radius: 8px;
     border-width: 1px;
@@ -89,12 +90,12 @@ span {
 .hourly-forecasts {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 6px;
 }
 
 .hourly-row {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 10px;
 }
 
@@ -116,11 +117,11 @@ app-hourly-forecast {
 }
 
 .spinner {
-    border: 10px solid #fd09094d;
+    border: 10px solid #fd090985;
     border-top: 10px solid #34ff01;
     border-radius: 50%;
-    width: 120px;
-    height: 120px;
+    width: 50px;
+    height: 50px;
     animation: spin 1s linear infinite; /* Rotating animation */
 }
 
@@ -148,11 +149,17 @@ app-hourly-forecast {
         text-align: right; /* Ensure proper alignment */
     }
 
+    .hourly-forecasts {
+        gap: 5px;
+    }
+
     img {
         width: 12vw;
         max-width: 50px;
         margin-top: 5px;
     }
+
+    .hourly-row{ gap: 7px; }
 
     .temp-wind-text {
         font-size: 0.7em;
@@ -171,12 +178,11 @@ app-hourly-forecast {
     }
 
     .spinner {
-        border: 6px solid #fd09094d;
-        border-top: 6px solid #34ff01;
-        width: 70px;
-        height: 70px;
+        /*border: 6px solid #fd090985;*/
+        /*border-top: 6px solid #30ff01;*/
+        width: 25px;
+        height: 25px;
 
     }
-
 
 }

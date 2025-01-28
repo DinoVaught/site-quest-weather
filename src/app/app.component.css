@@ -61,9 +61,12 @@
 .weather-widget{
     position: relative; /* Ensure the spinner-container aligns with this parent */
     background: #00000091;
-    margin: 0 auto;
+
+    margin-left: 100px;
+    margin-right: 100px;
     margin-top: 62px;
-    width: 60%;
+    /*max-width: 50px;*/
+    min-width: 800px;
     border: 1px solid;
     border-color: #fbfbfbbf;
     border-radius: 13px;
@@ -184,18 +187,30 @@
     }
 
     .about-dialog ul{
-        margin-bottom: 10px;
+        margin-bottom: 6px;
     }
 
     .weather-widget {
-        width: 89%;
+        /*width: 89%;*/
+        margin-left: 5px;
+        margin-right: 5px;
         margin-top: 44px;
         padding: 10px;
+        min-width: 0;
     }
 
     .linked-link {
         margin-left: 10px;
         font-size: 15px;
+    }
+
+    .button-row {
+        margin-top: 10px;
+    }
+
+    p{
+        margin-top: 2px;
+        margin-bottom: 10px;
     }
 
     .about-button {

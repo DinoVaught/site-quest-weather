@@ -4,11 +4,11 @@
     background-color: #fff9f938;
     border-radius: 8px;
     padding: 5px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
+    display: inherit;
+    /*flex-direction: column;*/
+    align-items: flex-start;
+    justify-content: left;
+    /*text-align: left;*/
     margin-top: 5px;
 }
 
@@ -24,13 +24,14 @@
     justify-content: flex-start;
     width: 100%;
     margin-bottom: 5px;
-    margin-left: 4px;
+    /*margin-left: 4px;*/
 }
 
 .icon {
-    width: 30px;
-    height: 30px;
-    margin-right: 5px; /* Space between icon and temperature */
+    width: 55px;
+    height: 55px;
+    /*margin-right: 1px; !* Space between icon and temperature *!*/
+    margin-left: 1px;
     border-radius: 4px;
     border-width: 1px;
     border-style: solid;
@@ -40,7 +41,7 @@
 .temp {
     font-size: 19px;
     font-weight: bold;
-    margin-left: 11px;
+    margin-left: 8px;
     background-color: white;
     color: black;
     padding-left: 3px;
@@ -49,28 +50,28 @@
 }
 
 .short-forecast {
-    font-size: 12px;
+    font-size: 13px;
     margin-top: 3px;
 }
 
 .wind {
-    font-size: 12px;
+    font-size: 13px;
     color: #ffffff;
     margin-top: 5px;
-    text-align: center;
+    text-align: inherit;
 }
 
 @media (max-width: 768px) {
 
     .forecast-item {
         width: 62px;
-        height: 66px;
+        height: 79px;
         margin-top: 2px;
     }
 
     .time {
-        font-size: 11px;
-        margin-top: 1px;
+        font-size: 12px;
+        margin-top: 3px;
         margin-bottom: 2px;
         margin-left: 2px;
         text-align: left;
@@ -78,13 +79,17 @@
     }
 
     .icon {
-        display: none;
+        /*display: none;*/
+        width: 20px;
+        height: 20px;
+        margin-top: 4px;
+        margin-right: 2px;
         margin-left: 0;
     }
     .temp {
-        font-size: 12px;
-        margin-top: 3px;
-        margin-left: 0;
+        font-size: 14px;
+        margin-top: 4px;
+        margin-left: 1px;
         padding-bottom: 1px;
         text-align: left;
 
@@ -92,8 +97,8 @@
 
     .short-forecast {
         font-size: 12px;
-        margin-top: 0;
-        margin-left: 6px;
+        margin-top: 7px;
+        margin-left: 0;
         text-align: left;
         width: 65px;
     }

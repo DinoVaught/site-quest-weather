@@ -5,32 +5,13 @@
     margin-right: 100px;
     /*margin-bottom: 2in;*/
     /*width: 300px;*/
-
+    min-width: 800px;
     padding-left: 15px;
-    border: 1px solid #171414;
+    border: 1px solid #fff504fc;
     border-radius: 8px;
-    background-color: #e7e7e7;
+    background-color: #fbfbfbbf;
     margin-bottom: calc(70px);
 }
-
-/*.rss-feed  {*/
-/*    text-decoration: none;*/
-/*    !*color: #007bff;*!*/
-/*    color: black;  !* main text color *!*/
-/*    font-weight: bold;*/
-/*    font-size: 20pX;*/
-/*}*/
-
-/*.rss-feed {*/
-/*    margin: 0.5em 0;*/
-/*    padding: 0.5em;*/
-/*    border-bottom: 2px solid #0c0b0b;*/
-/*    transition: background-color 0.2s ease-in-out;*/
-/*    font-family: monospace;*/
-/*    font-size: 18pX;*/
-/*}*/
-
-
 
 .rss-feed h2 {
     font-size: 40px;
@@ -46,7 +27,7 @@
     font-size: 26px;
     font-family: monospace;
     /*margin: 1em 0 0.5em 0;*/
-    margin-top: 52px;
+    margin-top: 13px;
     margin-bottom: 5px;
     margin-right: 11px;
 
@@ -60,6 +41,7 @@
 .rss-feed ul {
     list-style: none;
     padding: 1px;
+    margin-top: 0;
     /*margin: 0;*/
     /*margin-bottom: 50px;*/
     /*padding-bottom: 50px;*/
@@ -128,6 +110,8 @@
         margin-right: 5px;
         padding-left: 4px;
         margin-top: 10px;
+        min-width: 0;
+        /*min-width: 700px;*/
     }
 
     .rss-feed h2 {
@@ -137,7 +121,7 @@
 
     .rss-feed h3 {
         font-size: 13px;
-        margin-top: 30px;
+        margin-top: 10px;
     }
 
     .read-more {
@@ -147,17 +131,19 @@
         /*margin-top: 1px;*/
     }
 
+    .rss-feed ul li a {
+        font-size: 20px; /* top link (headline) */
+    }
+
     .rss-feed ul li p:first-of-type {
-        font-size: 13px;
+        font-size: 21px; /* article preview */
+        font-weight: bold;
     }
 
     .rss-feed ul li p small {
         font-size: 10px;
     }
 
-    .rss-feed ul li a {
-        font-size: 13px; /* Adjust the size as needed */
-    }
 
     .rss-feed ul li {
         margin-bottom: 15px;
@@ -170,8 +156,8 @@
         max-width: 100%; /* Ensure responsiveness */
     }
 
-    .description {
-        margin-right: 5px;
-    }
+    /*.description {*/
+    /*    margin-right: 5px;*/
+    /*}*/
 
 }

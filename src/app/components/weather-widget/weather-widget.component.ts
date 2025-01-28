@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common'; //
 import {ApiService} from '../../services/api.service';
 import { CurrentWeatherData, HourlyWeatherData  } from '../../models/weather-data.models'
 import { HourlyForecastComponent  } from '../hourly-forecast/hourly-forecast.component'
-import { environment } from "../../../environments/environment";
-
 
 
 @Component({
@@ -27,15 +25,10 @@ export class WeatherWidgetComponent implements OnInit {
     constructor(private apiService: ApiService) {
     }
 
+    //  900000); // = 15 minutes
     async ngOnInit(): Promise<void> {
 
-
-
-        // console.log(`environment.backendUrl: ${ environment.backendUrl } `);
-
-
         await this.fetchWeatherData();
-
 
         setInterval(() => {
             this.fetchWeatherData();
@@ -45,6 +38,8 @@ export class WeatherWidgetComponent implements OnInit {
     async fetchWeatherData(): Promise<void> {
         try {
             this.isLoading = true;
+
+            // console.log(`fetching weather data`);
 
             this.weatherData = await this.apiService.initService();
             this.hourlyWeather = this.apiService.getHourlyWeatherData();

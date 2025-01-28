@@ -1,11 +1,8 @@
 import {Injectable} from '@angular/core';
 import { DatePipe } from '@angular/common';
 import {HttpClient} from '@angular/common/http';
-import {lastValueFrom, Observable} from 'rxjs';
-import { format } from 'date-fns';
+import {lastValueFrom} from 'rxjs';
 import {CurrentWeatherData, HourlyWeatherData} from '../models/weather-data.models';
-import NewCommandModule from "@angular/cli/src/commands/new/cli";
-
 
 export const weatherData: CurrentWeatherData = {
     cityState: '',
@@ -51,6 +48,12 @@ export class ApiService {
 
 
     getLocation(): Promise<void> {
+
+        if (this.latitude != '' || this.longitude != '') {
+            // console.log(`Exiting getLocation() -   ${this.latitude}, ${this.longitude}`);
+            return Promise.resolve();
+        }
+
         return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -59,7 +62,7 @@ export class ApiService {
                         this.longitude = position.coords.longitude.toFixed(4);
                         this.latitude = position.coords.latitude.toFixed(4);
 
-                        resolve(); // Resolve the promise when done
+                        resolve();
                     },
                     error => {
                         console.error('Error fetching geolocation:', error);
@@ -179,7 +182,7 @@ export class ApiService {
         let targetElement = 0;
         try {
 
-            console.log(` hours url  ${url}` );
+            // console.log(` hours url  ${url}` );
 
             const JSON = await lastValueFrom(this.http.get<any>(url));
 

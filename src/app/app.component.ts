@@ -14,11 +14,13 @@ export class AppComponent {
 
   showAbout = false;
 
-  closeAbout() {
-    this.showAbout = false;
-  }
   openAbout() {
     this.showAbout = true;
+    document.body.classList.add('no-scroll');
   }
 
+  closeAbout() {
+    this.showAbout = false;
+    document.body.classList.remove('no-scroll');
+  }
 }
