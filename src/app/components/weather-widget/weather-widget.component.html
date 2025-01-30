@@ -8,11 +8,12 @@
 <div class="city-time-container">
     <p class="city-state">{{ weatherData?.cityState }}</p>
 <!--    <p class="time-text">{{ weatherData?.time }}</p>-->
-    <p class="time-text" [title]="'The most recent data from weather.gov was recorded at ' + weatherData?.time" >{{ weatherData?.time }}</p>
+    <p class="time-text" [title]="'The most recent data from weather.gov was recorded on ' + weatherData?.time"  >{{ weatherData?.time }}</p>
 </div>
 <div class="weather-details">
     <img *ngIf="weatherData?.iconURL" [src]="weatherData?.iconURL" alt="Weather Icon">
-    <div class="temp-wind-container" title="Weather data updates automatically every 15 minutes">
+    <div class="temp-wind-container" >
+<!--        <div class="temp-wind-container" title="Weather data updates automatically every 15 minutes">-->
         <span *ngIf="weatherData?.tempFahrenheit || weatherData?.wind" class="temp-wind-text">
             <span class="temp-text">{{ weatherData?.tempFahrenheit }}°F</span> - {{ weatherData?.wind }}
         </span>

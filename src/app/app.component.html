@@ -12,6 +12,11 @@
 
 <div *ngIf="showAbout" class="overlay"></div>
 <div *ngIf="showAbout" class="about-dialog">
+
+    <div class="dialog-header">
+        <button class="close-button" (click)="closeAbout()">×</button>
+    </div>
+
     <div class="dialog-content">
         <p>I created this Weather and News web app to gain additional real-world web development experience. It is my
             second web app.</p>

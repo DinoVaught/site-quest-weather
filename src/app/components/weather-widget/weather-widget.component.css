@@ -150,7 +150,7 @@ app-hourly-forecast {
     }
 
     .hourly-forecasts {
-        gap: 5px;
+        gap: 1px;
     }
 
     img {
@@ -159,10 +159,11 @@ app-hourly-forecast {
         margin-top: 5px;
     }
 
-    .hourly-row{ gap: 7px; }
+    .hourly-row{ gap: 2px; }
 
     .temp-wind-text {
-        font-size: 0.7em;
+        /*font-size: 0.7em;*/
+        font-size: 20px;
         margin-top: 4px;
     }
 
@@ -171,7 +172,7 @@ app-hourly-forecast {
     }
 
     .forecast-text {
-        font-size: 0.7rem;
+        font-size: 20px;
         margin-top: 5px;
         margin-left: 0;
         margin-bottom: 7px;

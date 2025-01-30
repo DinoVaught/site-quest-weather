@@ -67,6 +67,8 @@
         width: 62px;
         height: 79px;
         margin-top: 2px;
+        padding-left: 3px;
+        padding-right: 3px;
     }
 
     .time {

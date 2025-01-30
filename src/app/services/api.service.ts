@@ -54,6 +54,8 @@ export class ApiService {
             return Promise.resolve();
         }
 
+
+
         return new Promise((resolve, reject) => {
             if (navigator.geolocation) {
                 navigator.geolocation.getCurrentPosition(
@@ -89,9 +91,6 @@ export class ApiService {
 
             this.forecastHourlyUrl = JSON.properties.forecastHourly;
 
-            // console.log(`this.forecastHourlyUrl:  ${this.forecastHourlyUrl}`);
-            // console.log(`this.forecastUrl:  ${this.forecastUrl}`);
-
 
         } catch (error) {
             console.error('Error fetching weather data:', error);
@@ -106,11 +105,6 @@ export class ApiService {
             this.currentConditionsUrl = JSON.observationStations[0] + '/observations/latest';
 
             weatherData.stationName = JSON.features[0].properties.name; // [0] match with earlier array element num !!
-            // weatherData.temperature = '';
-            // temperature
-
-            // console.log(`this.observeStation1  url:  ${url}`); //  JSON.properties.observationStations
-            // console.log(`this.currentConditionsUrl:  ${this.currentConditionsUrl}`); //  JSON.properties.observationStations
 
 
         } catch (error) {
@@ -123,17 +117,8 @@ export class ApiService {
         try {
             const JSON = await lastValueFrom(this.http.get<any>(url));
 
-
             weatherData.wind = 'Wind: ' + JSON.properties.periods[0].windDirection + ' ' + JSON.properties.periods[0].windSpeed;
             weatherData.forecastCurrent =  JSON.properties.periods[0].name + ': ' +  JSON.properties.periods[0].detailedForecast;
-
-            // JSON.properties.periods[0].name
-
-            // weatherData.iconURL =  JSON.properties.periods[0].icon; // I think this is the 'forecast icon' not the 'current icon '
-
-            // console.log(`==== url:  ${url}`);
-
-
 
         } catch (error) {
             console.error('Error fetching weather data:', error);
@@ -148,14 +133,11 @@ export class ApiService {
             const JSON = await lastValueFrom(this.http.get<any>(url));
 
 
-
             weatherData.iconURL = JSON.properties.icon;
 
             const datePipe = new DatePipe('en-US')
             const timestamp = JSON.properties.timestamp;
             weatherData.time = datePipe.transform(timestamp, 'EEE h:mm a')  || 'Invalid date';
-
-            // console.log(`weatherData.time: ${weatherData.time}`);
 
             weatherData.tempFahrenheit = JSON.properties.temperature.value;
 
@@ -164,12 +146,6 @@ export class ApiService {
                 weatherData.tempFahrenheit = (weatherData.tempFahrenheit * 9) / 5 + 32;
                 weatherData.tempFahrenheit = Math.round(weatherData.tempFahrenheit);
             }
-
-
-
-            // console.log(`** !! url:  ${url}`);
-            // console.log(`weatherData.temperature:  ${weatherData.tempFahrenheit}`);
-
 
         } catch (error) {
             console.error('Error fetching weather data:', error);
@@ -182,7 +158,7 @@ export class ApiService {
         let targetElement = 0;
         try {
 
-            // console.log(` hours url  ${url}` );
+            hourlyWeatherData = [];
 
             const JSON = await lastValueFrom(this.http.get<any>(url));
 
@@ -193,14 +169,14 @@ export class ApiService {
                 const sysTime = new Date();
                 const currentMins = sysTime.getMinutes();
 
+                // console.log(`1:  apiTime: (${apiTime.toLocaleString()})  - sysTime: (${sysTime.toLocaleString()})`);
+
                 if (currentMins < 30) {
-                    sysTime.setMinutes(0, 0, 0);
+                    sysTime.setMinutes(0, 0, 0); // round hour down
                 } else {
-                    sysTime.setHours(sysTime.getHours() + 1, 0, 0, 0);
+                    sysTime.setHours(sysTime.getHours() + 1, 0, 0, 0);  // round hour up
                 }
 
-                // const tgtTime = format(sysTime, 'MM/dd/yyyy hh:mm:ss a');
-                // const apiTimeFormatted = format(apiTime, 'MM/dd/yyyy hh:mm:ss a');
                 if (apiTime > sysTime) {
                     targetElement = i;
                     break;
@@ -209,7 +185,12 @@ export class ApiService {
 
             const hourlyPeriods = JSON.properties.periods.slice(targetElement, targetElement + 8);
 
+
             for (let i = 0; i < hourlyPeriods.length; i++) {
+
+                // if (i < 4) {
+                //     console.log(`hourlyPeriods[${i}].startTime.toString(): ${hourlyPeriods[i].startTime.toString()}`);
+                // }
 
                 const hourItem: HourlyWeatherData = {
                     time: hourlyPeriods[i].startTime.toString(),
@@ -230,6 +211,7 @@ export class ApiService {
 
      getHourlyWeatherData(): HourlyWeatherData[] {
         return hourlyWeatherData;
-    }
+     }
+
 
 }

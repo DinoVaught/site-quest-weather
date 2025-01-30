@@ -27,7 +27,7 @@ export class RssFeedComponent implements OnInit {
             const feedUrl = `${this.apiUrl}foxnews`;
             const response = await lastValueFrom(this.http.get<any[]>(feedUrl));
 
-            console.log(response);
+            // console.log(response);
 
             this.rssItems = response?.map(item => ({
                 ...item,
