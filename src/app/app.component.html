@@ -10,7 +10,8 @@
 </div>
 <app-rss-feed></app-rss-feed>
 
-<div *ngIf="showAbout" class="overlay"></div>
+
+<div *ngIf="showAbout" class="overlay" (click)="closeAbout()"></div>
 <div *ngIf="showAbout" class="about-dialog">
 
     <div class="dialog-header">

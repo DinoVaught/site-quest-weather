@@ -131,7 +131,7 @@
     --shadow-color: aquamarine;
     box-shadow: 0 0 7px 1px var(--shadow-color);
     border-radius: 8px;
-    width: 50%;
+    width: 40%;
     padding-top: 0;
     padding-right: 20px;
     padding-bottom: 20px;
