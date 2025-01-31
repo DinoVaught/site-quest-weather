@@ -25,24 +25,26 @@
     <!-- First row -->
     <div class="hourly-row">
         <app-hourly-forecast
-                *ngFor="let forecast of firstRow"
-                [time]="forecast.time"
-                [temp]="forecast.temp"
-                [iconURL]="forecast.iconURL"
-                [wind]="forecast.wind"
-                [shortForecast]="forecast.shortForecast">
+            #forecastItem
+            *ngFor="let forecast of firstRow"
+            [time]="forecast.time"
+            [temp]="forecast.temp"
+            [iconURL]="forecast.iconURL"
+            [wind]="forecast.wind"
+            [shortForecast]="forecast.shortForecast">
         </app-hourly-forecast>
     </div>
 
     <!-- Second row -->
     <div class="hourly-row">
         <app-hourly-forecast
-                *ngFor="let forecast of secondRow"
-                [time]="forecast.time"
-                [temp]="forecast.temp"
-                [iconURL]="forecast.iconURL"
-                [wind]="forecast.wind"
-                [shortForecast]="forecast.shortForecast">
+            #forecastItem
+            *ngFor="let forecast of secondRow"
+            [time]="forecast.time"
+            [temp]="forecast.temp"
+            [iconURL]="forecast.iconURL"
+            [wind]="forecast.wind"
+            [shortForecast]="forecast.shortForecast">
         </app-hourly-forecast>
     </div>
 </div>

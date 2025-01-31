@@ -1,6 +1,6 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, ChangeDetectorRef, OnInit, AfterViewChecked, ElementRef, QueryList, ViewChildren} from '@angular/core';
 import { CommonModule } from '@angular/common'; //
-import { ChangeDetectorRef } from '@angular/core';
+// import { ChangeDetectorRef } from '@angular/core';
 import {ApiService} from '../../services/api.service';
 import { CurrentWeatherData, HourlyWeatherData  } from '../../models/weather-data.models'
 import { HourlyForecastComponent  } from '../hourly-forecast/hourly-forecast.component'
@@ -15,7 +15,7 @@ import { HourlyForecastComponent  } from '../hourly-forecast/hourly-forecast.com
 })
 
 
-export class WeatherWidgetComponent implements OnInit {
+export class WeatherWidgetComponent implements OnInit, AfterViewChecked {
     weatherData: CurrentWeatherData | null = null;
     hourlyWeather: HourlyWeatherData[] = [];
     firstRow: any[] = [];
@@ -23,8 +23,11 @@ export class WeatherWidgetComponent implements OnInit {
 
     isLoading = true;
 
+    @ViewChildren('forecastItem', { read: ElementRef }) forecastItems!: QueryList<ElementRef>;
+
     constructor(private apiService: ApiService, private cdr: ChangeDetectorRef) {
     }
+
 
     // 900000); // = 15 minutes
     // 300000 =    5 min
@@ -43,6 +46,53 @@ export class WeatherWidgetComponent implements OnInit {
         // setInterval(() => {
         //     this.fetchWeatherData();
         // }, 300000);
+    }
+
+    ngAfterViewChecked(): void {
+
+
+        if (this.forecastItems?.length > 0) {
+            console.log(`Forecast items count: ${this.forecastItems?.length} `);
+
+            let count = 0;
+
+            let maxWidth = 0;
+
+            this.forecastItems.forEach(item => {
+
+                count++;
+                console.log(`${count} - offsetWidth:  (${item.nativeElement.offsetWidth})`);
+
+                const width = item.nativeElement.offsetWidth;
+                if (width > maxWidth) {
+                    maxWidth = width;
+                }
+            });
+
+
+            this.syncWidths(maxWidth);
+            console.log(`maxWidth:  (${maxWidth})`);
+
+        }
+
+        // console.log('Forecast items count:', this.forecastItems?.length || 0);
+    }
+
+    syncWidths(maxWidth: number): void {
+
+
+        let count = 0;
+
+        this.forecastItems.forEach(item => {
+            if (item && item.nativeElement) {
+                item.nativeElement.style.width = maxWidth + 'px';
+
+                count++;
+                console.log(`${count} - syncWidths: (${maxWidth}) `);
+
+            }
+        });
+
     }
 
     async fetchWeatherData(): Promise<void> {
