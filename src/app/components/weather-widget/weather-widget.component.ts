@@ -29,39 +29,36 @@ export class WeatherWidgetComponent implements OnInit, AfterViewChecked {
     }
 
 
-    // 900000); // = 15 minutes
-    // 300000 =    5 min
     async ngOnInit(): Promise<void> {
+
+        // 900000); // = 15 minutes     // 300000 =    5 min     // 20000 =    20 seconds
+        const interval: number = 900000;
 
         await this.fetchWeatherData();
 
         const fetchWeatherPeriodically = async () => {
             await this.fetchWeatherData(); // Fetch the data
-            setTimeout(fetchWeatherPeriodically, 900000); // Schedule next execution
+            setTimeout(fetchWeatherPeriodically, interval); // Schedule next execution
         };
 
-        setTimeout(fetchWeatherPeriodically, 900000);
+        setTimeout(fetchWeatherPeriodically, interval);
 
-
-        // setInterval(() => {
-        //     this.fetchWeatherData();
-        // }, 300000);
     }
 
     ngAfterViewChecked(): void {
 
 
         if (this.forecastItems?.length > 0) {
-            console.log(`Forecast items count: ${this.forecastItems?.length} `);
+            // console.log(`Forecast items count: ${this.forecastItems?.length} `);
 
-            let count = 0;
+            // let count = 0;
 
             let maxWidth = 0;
 
             this.forecastItems.forEach(item => {
 
-                count++;
-                console.log(`${count} - offsetWidth:  (${item.nativeElement.offsetWidth})`);
+                // count++;
+                // console.log(`${count} - offsetWidth:  (${item.nativeElement.offsetWidth})`);
 
                 const width = item.nativeElement.offsetWidth;
                 if (width > maxWidth) {
@@ -71,7 +68,7 @@ export class WeatherWidgetComponent implements OnInit, AfterViewChecked {
 
 
             this.syncWidths(maxWidth);
-            console.log(`maxWidth:  (${maxWidth})`);
+            // console.log(`maxWidth:  (${maxWidth})`);
 
         }
 
@@ -81,14 +78,14 @@ export class WeatherWidgetComponent implements OnInit, AfterViewChecked {
     syncWidths(maxWidth: number): void {
 
 
-        let count = 0;
+        // let count = 0;
 
         this.forecastItems.forEach(item => {
             if (item && item.nativeElement) {
                 item.nativeElement.style.width = maxWidth + 'px';
 
-                count++;
-                console.log(`${count} - syncWidths: (${maxWidth}) `);
+                // count++;
+                // console.log(`${count} - syncWidths: (${maxWidth}) `);
 
             }
         });
@@ -102,8 +99,10 @@ export class WeatherWidgetComponent implements OnInit, AfterViewChecked {
             this.weatherData = await this.apiService.initService();
 
 
-            const newHourlyWeather = this.apiService.getHourlyWeatherData();
-            this.hourlyWeather = [...newHourlyWeather];
+            // const newHourlyWeather = this.apiService.getHourlyWeatherData();
+            // this.hourlyWeather = [...newHourlyWeather];
+
+            this.hourlyWeather = this.apiService.getHourlyWeatherData();
 
 
             this.firstRow = this.hourlyWeather.slice(0, 4);

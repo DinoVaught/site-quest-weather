@@ -79,11 +79,23 @@ export class ApiService {
     }
 
     async getInitData(): Promise<void> {
+
+        if (this.observeStation1 != '' || this.forecastUrl != '' || this.forecastHourlyUrl != '' || weatherData.cityState != '' ) {
+            // console.log(`Exiting getInitData() -   ${this.observeStation1}, ${this.forecastUrl}  ${this.forecastHourlyUrl}, ${weatherData.cityState} `);
+            return Promise.resolve();
+        }
+
         const url = `https://api.weather.gov/points/${this.latitude},${this.longitude}`;
         try {
             const JSON = await lastValueFrom(this.http.get<any>(url));
 
             weatherData.cityState = `${JSON.properties.relativeLocation.properties.city}, ${JSON.properties.relativeLocation.properties.state}`;
+
+
+            // this.latitude != '' || this.longitude
+
+            // console.log(`this.observeStation1.length: ${this.observeStation1}  `);
+            // console.log(`this.forecastUrl.length: ${this.forecastUrl} `);
 
             this.observeStation1 = JSON.properties.observationStations;
 
@@ -98,6 +110,13 @@ export class ApiService {
     }
 
     async getData1(): Promise<void> {
+
+        if (this.currentConditionsUrl != '' || weatherData.stationName != '' ) {
+            // console.log(`Exiting getData1() -   (${this.currentConditionsUrl}), (${weatherData.stationName} )`);
+            return Promise.resolve();
+
+        }
+
         const url = this.observeStation1;
         try {
             const JSON = await lastValueFrom(this.http.get<any>(url));
@@ -158,7 +177,7 @@ export class ApiService {
         let targetElement = 0;
         try {
 
-            hourlyWeatherData = [];
+            // hourlyWeatherData = [];
 
             const JSON = await lastValueFrom(this.http.get<any>(url));
 
