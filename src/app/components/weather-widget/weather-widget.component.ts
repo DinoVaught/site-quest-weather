@@ -99,8 +99,8 @@ export class WeatherWidgetComponent implements OnInit, AfterViewChecked {
             this.weatherData = await this.apiService.initService();
 
 
-            // const newHourlyWeather = this.apiService.getHourlyWeatherData();
-            // this.hourlyWeather = [...newHourlyWeather];
+            const newHourlyWeather = this.apiService.getHourlyWeatherData();
+            this.hourlyWeather = [...newHourlyWeather];
 
             this.hourlyWeather = this.apiService.getHourlyWeatherData();
 
