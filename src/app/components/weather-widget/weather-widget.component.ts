@@ -31,6 +31,8 @@ export class WeatherWidgetComponent implements OnInit, AfterViewChecked {
 
     async ngOnInit(): Promise<void> {
 
+        // confirm('Do you want to continue?');
+
         // 900000); // = 15 minutes     // 300000 =    5 min     // 20000 =    20 seconds
         const interval: number = 900000;
 

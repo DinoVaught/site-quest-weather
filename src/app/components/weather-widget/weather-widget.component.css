@@ -93,25 +93,25 @@ span {
     gap: 6px;
 }
 
-app-hourly-forecast {
-    /*display: flex;*/
-    /*flex-direction: column;*/
-    /*align-items: center;*/
-    /*justify-content: center;*/
-    /*text-align: center;*/
-    /*width: 100%; !* Makes sure all items take equal width *!*/
-}
+/*app-hourly-forecast {*/
+/*    !*display: flex;*!*/
+/*    !*flex-direction: column;*!*/
+/*    !*align-items: center;*!*/
+/*    !*justify-content: center;*!*/
+/*    !*text-align: center;*!*/
+/*    !*width: 100%; !* Makes sure all items take equal width *!*!*/
+/*}*/
 
 .hourly-row {
     display: flex;
-    justify-content: center;
+    /*justify-content: center;*/
     white-space: nowrap;
-
     gap: 10px;
 }
 
 app-hourly-forecast {
     flex: 0 0 auto;
+    /*width: 180px;*/
 }
 
 .spinner-container {
@@ -147,7 +147,7 @@ app-hourly-forecast {
 
 
 
-@media (max-width: 768px) {
+@media (max-width: 1190px) {
 
     .city-state {
         font-size: 0.7rem;

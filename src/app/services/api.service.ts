@@ -40,7 +40,7 @@ export class ApiService {
          await this.getInitData();
          await this.getData1();
          await this.getImmediateForecast();
-         await this.getLocalData();
+         await this.getCurrentWeather();
          await this.getHourlyForecast();
 
         return weatherData;
@@ -61,14 +61,21 @@ export class ApiService {
                 navigator.geolocation.getCurrentPosition(
                     position => {
 
-                        this.longitude = position.coords.longitude.toFixed(4);
-                        this.latitude = position.coords.latitude.toFixed(4);
-
+                        this.longitude = position.coords.longitude.toFixed(5);
+                        this.latitude = position.coords.latitude.toFixed(5);
                         resolve();
                     },
                     error => {
-                        console.error('Error fetching geolocation:', error);
-                        reject(error); // Reject the promise if there's an error
+                        // console.error('Error fetching geolocation:', error);
+                        if (error.code === 1 && location.protocol !== 'https:') {
+                            this.longitude = '-90.36544133993543';
+                            this.latitude = '38.750082483267974';
+                            console.warn('Using default location due to insecure origin.');
+                            alert('Location services unavailable.' + '\n\n' +  'Using default location (St. Louis Lambert International Airport)');
+                            resolve(); // Resolve with default values
+                            return;
+                        }
+                        reject(error); // Reject the promise
                     }
                 );
             } else {
@@ -91,10 +98,8 @@ export class ApiService {
 
             weatherData.cityState = `${JSON.properties.relativeLocation.properties.city}, ${JSON.properties.relativeLocation.properties.state}`;
 
-
-            // this.latitude != '' || this.longitude
-
-            // console.log(`this.observeStation1.length: ${this.observeStation1}  `);
+            console.log(`url: ${url} `);
+            // console.log(`this.observeStation1.length: ${this.observeStation1} `);
             // console.log(`this.forecastUrl.length: ${this.forecastUrl} `);
 
             this.observeStation1 = JSON.properties.observationStations;
@@ -133,6 +138,9 @@ export class ApiService {
 
     async getImmediateForecast(): Promise<void> {
         const url = this.forecastUrl ;
+
+        console.log(`*** url: ${url} `);
+
         try {
             const JSON = await lastValueFrom(this.http.get<any>(url));
 
@@ -144,7 +152,7 @@ export class ApiService {
         }
     }
 
-    async getLocalData(): Promise<void> {
+    async getCurrentWeather(): Promise<void> {
 
 
         const url = this.currentConditionsUrl;
@@ -177,7 +185,7 @@ export class ApiService {
         let targetElement = 0;
         try {
 
-            // hourlyWeatherData = [];
+            hourlyWeatherData = [];
 
             const JSON = await lastValueFrom(this.http.get<any>(url));
 

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener  } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { WeatherWidgetComponent } from './components/weather-widget/weather-widget.component';
 import { RssFeedComponent } from './components/rss-feed/rss-feed.component';
@@ -23,4 +23,10 @@ export class AppComponent {
     this.showAbout = false;
     document.body.classList.remove('no-scroll');
   }
+
+  @HostListener('document:keydown.escape', ['$event'])
+  handleEscapeKey(event: KeyboardEvent) {
+    this.closeAbout();
+  }
+
 }
